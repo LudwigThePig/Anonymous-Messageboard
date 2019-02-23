@@ -10,11 +10,26 @@ body{
 }
 
 #header{
-  background: #000;
-  color: #DF7500;
+  background: #1D1D1B;
+  color: #CB8B5A;
   height: 10vh;
-  margin: auto;
+  padding: 0 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+@media screen and (max-width: 740px){
+  #header{
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 530px){
+  #header{
+    padding: 0;
+    font-size: 16px;
+  }
+}
+
 
 #body{
   height: 90vh;

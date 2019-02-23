@@ -34,13 +34,13 @@ body{
   grid-template-columns: 1fr 1fr;
   justify-content: center;
 }
-#boards span{
+#boards a{
   background: #ddd;
   color: #222;
   padding: 10px;
   font-size: 2em;
 }
-#boards span:hover{
+#boards a:hover{
   background: #fff;
   cursor: pointer;
 }

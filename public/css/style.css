@@ -37,45 +37,6 @@ body{
 #body{
   height: 90vh;
 }
-#forms{
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.threadDiv{
-  background: #ccc;
-  margin: 10px;
-}
-.threadDiv h3{
-  text-align: left;
-  font-size: 1.2em;
-  color: #000;
-}
-.threadDiv span{
-  color: #333;
-}
-
-#boards{
-  width: 80%;
-  margin: 20px auto;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
-}
-#boards a{
-  background: #ddd;
-  color: #222;
-  padding: 10px;
-  font-size: 2em;
-}
-#boards a:hover, .threadDiv:hover{
-  background: #fff;
-  cursor: pointer;
-}
-
 
 button, .button{
 	-moz-box-shadow: inset 0px 29px 0px -15px #b54b3a;

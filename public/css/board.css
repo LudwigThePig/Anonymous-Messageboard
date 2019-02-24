@@ -1,0 +1,16 @@
+.threadDiv{
+    background: #ccc;
+    margin: 10px;
+  }
+  .threadDiv h3{
+    text-align: left;
+    font-size: 1.2em;
+    color: #000;
+  }
+  .threadDiv span{
+    color: #333;
+  }
+  .threadDiv:hover{
+    background: #fff;
+    cursor: pointer;
+  }

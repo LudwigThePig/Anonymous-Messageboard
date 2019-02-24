@@ -1,0 +1,11 @@
+.thread{
+    text-align: left
+    }
+    
+.replies{
+    background: purple;
+} 
+
+.replyNode{
+    background: yellow;
+}

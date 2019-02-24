@@ -3,19 +3,28 @@
   <head>
     <title>Welcome to HyperDev!</title>
     <meta name="description" content="A cool thing made with HyperDev">
-    <link id="favicon" rel="icon" href="https://hyperdev.com/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/public/style.css">
+    <link id="favicon" rel="icon" href="https://cdn2.iconfinder.com/data/icons/black-animal-svg-icons/512/pig_piggy_bank_money_finance-128.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/thread.css">
   </head>
   <body>
-    <header>
-      <h1 id='threadTitle'></h1>
-    </header>
-    <br>
+    <div id="header">
+      <h1>Anonymous Messageboard</h1>
+    </div>
+    <div id="thread"></div>
+    <div id="replies">
+      <div id="replyNode">
+      </div>
+      <form id="replyForm">
+        <input type="text" placeholder="Your insightful comment" name="reply" required=""><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
     
-    <div id='boardDisplay'></div>
-    
+  <script src="/public/js/replies.js"></script>
+
   </body>
 </html>

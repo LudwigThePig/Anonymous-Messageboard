@@ -1,11 +1,19 @@
-.thread{
+#header h2{
+    color: #ccc;
+    }
+    #header h2:hover{
+      cursor: pointer;
+      color: #fff;
+    }
+    
+    .thread{
     text-align: left
     }
     
-.replies{
-    background: purple;
-} 
-
-.replyNode{
-    background: yellow;
-}
+    .replies{
+      background: purple;
+    } 
+    
+    .replyNode{
+      background: yellow;
+    }

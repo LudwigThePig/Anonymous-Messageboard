@@ -43,6 +43,19 @@ body{
   flex-wrap: wrap;
 }
 
+.threadDiv{
+  background: #ccc;
+  margin: 10px;
+}
+.threadDiv p{
+  text-align: left;
+  font-size: 1.2em;
+  color: #000;
+}
+.threadDiv span{
+  color: #333;
+}
+
 #boards{
   width: 80%;
   margin: 20px auto;

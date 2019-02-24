@@ -1,8 +1,10 @@
 'use strict';
 var expect = require('chai').expect;
 const Thread = require('../controllers/thread-handler.js');
+const Reply = require('../controllers/reply-handler.js');
 
 const thread = new Thread;
+const reply = new Reply;
 
 module.exports = function (app) {
   
@@ -11,6 +13,7 @@ module.exports = function (app) {
     .post(thread.addThread)
     .delete(thread.deleteThread);
     
-  app.route('/api/replies/:board');
+  app.route('/api/replies/:board')
+  ;
 
 };

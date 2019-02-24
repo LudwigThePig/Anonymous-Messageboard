@@ -7,6 +7,10 @@ const ThreadSchema = new Schema({
     type: String,
     default: new Date()
   },
+  board: {
+    type: String,
+    required: true
+  },
   threadText: {
     type: String,
     required: true,

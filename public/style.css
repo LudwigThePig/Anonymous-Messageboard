@@ -47,7 +47,7 @@ body{
   background: #ccc;
   margin: 10px;
 }
-.threadDiv p{
+.threadDiv h3{
   text-align: left;
   font-size: 1.2em;
   color: #000;
@@ -71,7 +71,7 @@ body{
   padding: 10px;
   font-size: 2em;
 }
-#boards a:hover{
+#boards a:hover, .threadDiv:hover{
   background: #fff;
   cursor: pointer;
 }

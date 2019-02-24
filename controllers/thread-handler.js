@@ -2,7 +2,15 @@ const Thread = require('../models/thread-model.js');
 
 function ControllerHandler(){
   this.getThreads = (req, res)=>{
-    
+    const board = req.params.board;
+    Thread.find({board: board}, (err, docs)=>{
+      if (err) console.log(err);
+      for (let i = 0; i<docs.length; i++){
+        docs[i].deleteKey = ''; //Avoids sending the key to the client.
+      }
+      res.json(docs);
+
+    })
   }
   
   this.addThread = (req, res)=>{
@@ -17,6 +25,7 @@ function ControllerHandler(){
         console.log('spam response');
       } else {
         let thread = new Thread({
+          board: board,
           threadText: text,
           deleteKey: key
         })

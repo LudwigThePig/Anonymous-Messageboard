@@ -3,6 +3,9 @@ let threads = [];
 const http = {
   getter: ()=>{
     return fetch(`/api/threads/${boardName}`)
+      .then(response => response.json())
+      .then(data => threads = data).then(_=>console.log(threads))
+      .catch(err => console.log(err));
   },
   poster: (thread)=>{
     const options = {
@@ -11,6 +14,9 @@ const http = {
       headers: {'Content-Type': 'application/json'}
     }
     return fetch(`/api/threads/${boardName}`, options)
+      .then(response => response)
+      .then(data => data)
+      .catch(err => console.log(err));
   },
   deleter: (thread)=>{
     const options = {
@@ -26,10 +32,26 @@ const renderer = ()=>{
   document.getElementById('boardName').innerText = `${boardNameFormated} Board`;
 };
 
+const eventListeners = ()=>{
+  const dom = {
+    form: document.getElementById('newThread'),
+    textArea: document.getElementsByName('text')[0],
+    deleteKey: document.getElementsByName('deleteKey')[0]
+  }
+  dom.form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const request = {
+      "threadText": dom.textArea.value,
+      "deleteKey": dom.deleteKey.value
+    }
+    http.poster(JSON.stringify(request));
+  })
+};
+
 const init = ()=>{
-  console.log('good day mate, more to come soon');
-  console.log(boardName);
+  http.getter();
   renderer();
+  eventListeners();
 };
 
 document.onload = init();

@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ThreadSchema = new Schema({
-  dateCreated: {
-    type: String,
-    default: new Date()
-  },
   board: {
     type: String,
     required: true
@@ -22,6 +18,13 @@ const ThreadSchema = new Schema({
     required: true,
     min: 1,
     max: 10,
+  },
+  dateCreated: {
+    type: String,
+    default: new Date()
+  },
+  comments: {
+    type: [String]
   }
 });
 

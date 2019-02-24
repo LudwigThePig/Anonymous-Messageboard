@@ -18,6 +18,9 @@ body{
   justify-content: space-between;
   align-items: center;
 }
+#header h2{
+  color: #fefefe;
+}
 @media screen and (max-width: 740px){
   #header{
     flex-direction: column;

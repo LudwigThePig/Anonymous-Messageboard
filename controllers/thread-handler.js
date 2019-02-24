@@ -1,8 +1,8 @@
-const Thread = require('../models/thread.js');
+const Thread = require('../models/thread-model.js');
 
 function ControllerHandler(){
   this.getThreads = (req, res)=>{
-      
+
   }
   
   this.addThread = (req, res)=>{

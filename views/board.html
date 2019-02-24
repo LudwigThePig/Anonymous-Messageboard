@@ -3,23 +3,31 @@
   <head>
     <title>Welcome to HyperDev!</title>
     <meta name="description" content="A cool thing made with HyperDev">
-    <link id="favicon" rel="icon" href="https://hyperdev.com/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link id="favicon" rel="icon" href="https://cdn2.iconfinder.com/data/icons/black-animal-svg-icons/512/pig_piggy_bank_money_finance-128.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/style.css">
   </head>
   <body>
+    <div id="header">
+      <h1>Anonymous Messageboard</h1>
+      <h2 id="boardName">[Board Name]</h2>
+    </div>
     
-    <div id='submitNewThread'>
+    <div id="threads">
+      
+    </div>
+    
+    <div id="submitNewThread">
       <h3>Submit a new thread:</h3>
       <form id="newThread">
-        <textarea rows="8" cols="120" type='text' placeholder='Thread text...' name='text' required=''></textarea><br>
-        <input type='text' placeholder='password to delete' name='delete_password' required=''><br>
+        <textarea rows="8" cols="120" type=:"text" placeholder="Thread text..." name="text" required=""></textarea><br>
+        <input type="text" placeholder="password to delete" name="delete_password" required=""><br>
         <input type="submit" value="Submit">
       </form>
     </div>
         
-    
+    <script src="/public/js/thread.js"></script>
   </body>
 </html>

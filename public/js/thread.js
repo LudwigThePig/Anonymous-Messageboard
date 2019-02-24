@@ -4,7 +4,8 @@ const http = {
   getter: ()=>{
     return fetch(`/api/threads/${boardName}`)
       .then(response => response.json())
-      .then(data => threads = data).then(_=>console.log(threads))
+      .then(data => threads = data)
+      .then(_=> renderer())
       .catch(err => console.log(err));
   },
   poster: (thread)=>{
@@ -27,9 +28,28 @@ const http = {
     return fetch(`/api/threads/${boardName}`)
   }
 }//end http
-const renderer = ()=>{
-  const boardNameFormated = boardName.slice(0,1).toUpperCase() + boardName.slice(1);
-  document.getElementById('boardName').innerText = `${boardNameFormated} Board`;
+const renderer = ()=>{  
+  const domNode = document.getElementById('threads');
+  for (let i = 0; i < threads.length; i++){
+    const div = document.createElement('div');
+    const threadText = document.createElement('p');
+    const date = document.createElement('span');
+    const deleteLink = document.createElement('span');
+    
+    threadText.innerText = threads[i].threadText;
+    date.innerText = threads[i].dateCreated;
+    deleteLink.innerText = 'Delete Thread';
+    
+    div.setAttribute('class', 'threadDiv');
+    deleteLink.setAttribute('class', 'deleteLink');
+    deleteLink.setAttribute('id', threads[i]._id)
+    
+    div.appendChild(threadText);
+    div.appendChild(date);
+    div.appendChild(deleteLink);
+    domNode.appendChild(div)
+  }
+  
 };
 
 const eventListeners = ()=>{
@@ -50,7 +70,8 @@ const eventListeners = ()=>{
 
 const init = ()=>{
   http.getter();
-  renderer();
+  const boardNameFormated = boardName.slice(0,1).toUpperCase() + boardName.slice(1);
+  document.getElementById('boardName').innerText = `${boardNameFormated} Board`;
   eventListeners();
 };
 

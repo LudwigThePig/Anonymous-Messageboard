@@ -1,19 +1,26 @@
 #header h2{
-    color: #ccc;
-    }
-    #header h2:hover{
-      cursor: pointer;
-      color: #fff;
-    }
-    
-    .thread{
-    text-align: left
-    }
-    
-    .replies{
-      background: purple;
-    } 
-    
-    .replyNode{
-      background: yellow;
-    }
+  color: #ccc;
+  }
+  #header h2:hover{
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .thread{
+  text-align: left
+  }
+  
+  #replies{
+    background-color: #bcbcbc;
+    color: #222;
+    width: 80%;
+    margin: auto;
+  }
+  ul{
+    list-style: none;
+    text-align: left;
+  }
+  li{
+    border-bottom: 1px solid white;
+  }
+  

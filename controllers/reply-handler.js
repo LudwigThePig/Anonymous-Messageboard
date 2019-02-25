@@ -5,13 +5,17 @@ function ReplyHandler(){
     const id = req.params.board;
     Thread.findById(id, (err, doc)=>{
       if (err) console.log(err);
-      res.json(doc);
+      const response = doc.map(x => x.reply);
+      res.json(response);
     })
   };
   
   this.addReply = (req, res)=>{
     console.log(req.body);
-    const reply = req.body.reply;
+    const reply = {
+      reply: req.body.reply,
+      key:req.body.key
+    }
     const id = req.body.id;
     Thread.findById(id, (err, doc)=>{
       if (err) console.log(err);

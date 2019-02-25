@@ -24,7 +24,7 @@ const ThreadSchema = new Schema({
     default: new Date()
   },
   comments: {
-    type: [String]
+    type: [Object]
   }
 });
 

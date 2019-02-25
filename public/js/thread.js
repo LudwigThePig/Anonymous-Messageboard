@@ -29,7 +29,7 @@ const http = {
       body: thread,
       headers: {'Content-Type': 'application/json'}
     };
-    return fetch(`/api/replies/${id}`)
+    return fetch(`/api/threads/${id}`)
   }
 }//end http
 const renderer = ()=>{
@@ -56,17 +56,25 @@ const renderer = ()=>{
 
 const eventListeners = ()=>{
   const dom = {
-    form: document.getElementById('replyForm'),
+    formReply: document.getElementById('replyForm'),
     reply: document.getElementsByName('text')[0],
+    replyKey: document.getElementsByName('delete')[0],
+    formDelete: document.getElementById('deleteForm'),
+    threadKey: document.getElementsByName('text')[1]
   }
-  dom.form.addEventListener('submit', (e)=>{
+  dom.formReply.addEventListener('submit', (e)=>{
     e.preventDefault();
     const request = {
       "reply": dom.reply.value,
+      "key": dom.replyKey.value,
       "id": id
     }
     http.poster(JSON.stringify(request));
     location.reload();
+  })
+  dom.formDelete.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    http.deleter(JSON.stringify({key: dom.threadKey.value}))
   })
 };
 

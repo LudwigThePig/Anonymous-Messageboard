@@ -20,12 +20,18 @@
       <div id="replyNode">
       </div>
       <form id="replyForm">
-        <input type="text" placeholder="Your insightful reply" name="text" required="">
+        <label>Reply</label>
+        <input type="text" placeholder="Your insightful reply" name="text" required=""><br>
+        <label>Delete Key</label>
+        <input type="text" placeholder="Key to delete comment" name="delete" required="">
         <input type="submit" class="button" value="Submit">
       </form>
     </div>
-    
+    <form id="deleteForm">
+      <label>Delete this thread</label>
+      <input type="text" placeholder="delete key" name="text" required="">
+      <input type="submit" class="button" value="submit">
+    </form>
   <script src="/public/js/thread.js"></script>
-
   </body>
 </html>

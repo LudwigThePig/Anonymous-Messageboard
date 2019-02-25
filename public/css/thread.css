@@ -6,15 +6,16 @@
     color: #fff;
   }
   
-  .thread{
-  text-align: left
+  #thread{
+  text-align: left;
   }
   
-  #replies{
-    background-color: #bcbcbc;
+  #replies, #thread{
+    background-color: #ddd;
     color: #222;
     width: 80%;
-    margin: auto;
+    padding: 20px;
+    margin: 10px auto;
   }
   ul{
     list-style: none;

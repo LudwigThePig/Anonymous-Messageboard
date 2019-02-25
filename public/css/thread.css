@@ -17,11 +17,17 @@
     padding: 20px;
     margin: 10px auto;
   }
-  ul{
-    list-style: none;
-    text-align: left;
-  }
-  li{
+  .replyDiv{
     border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #replyNode span{
+    font-size: .8em;
+  }
+  #replies form{
+    padding-top: 10px;
+    border-top: 3px solid #454851;
   }
   

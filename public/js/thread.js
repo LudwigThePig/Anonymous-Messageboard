@@ -47,11 +47,19 @@ const renderer = ()=>{
   
   if (thread.comments.length !== 0){
     const comments = thread.comments;
-    const commentList = document.createElement('ul');
+    const commentList = document.createElement('div');
     for (let i = 0; i < comments.length; i++){
-      const li = document.createElement('li');
-      li.innerText = comments[i];
-      commentList.appendChild(li);
+      const div = document.createElement('div');
+      const p = document.createElement('p');
+      const span = document.createElement('span');
+      
+      div.setAttribute('class', 'replyDiv')
+      p.innerText = comments[i];
+      span.innerText = 'Delete Comment';
+      
+      div.appendChild(p);
+      div.appendChild(span);
+      commentList.appendChild(div);
     }
     document.getElementById('replyNode').appendChild(commentList);
   }

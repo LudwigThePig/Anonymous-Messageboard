@@ -57,6 +57,8 @@ const renderer = ()=>{
       p.innerText = comments[i];
       span.innerText = 'Delete Comment';
       
+      span.setAttribute('onclick', `appendDeleteReply(${i})`);
+      
       div.appendChild(p);
       div.appendChild(span);
       commentList.appendChild(div);
@@ -89,6 +91,26 @@ const eventListeners = ()=>{
     window.location.replace(`/b/${board}`);
   })
 };
+
+const appendDeleteReply = (index)=>{
+  const form = document.createElement('form');
+  const text = document.createElement('input');
+  const submit = document.createElement('input');
+  
+  form.setAttribute('id', `delete${index}`)
+  text.setAttribute('type', 'text');
+  text.setAttribute('placeholder', 'delete key');
+  text.setAttribute('required', "''");
+  submit.setAttribute('type', 'submit');
+  submit.setAttribute('class', 'button');
+  submit.setAttribute('value', 'delete');
+
+  form.appendChild(text);
+  form.appendChild(submit);
+  
+  document.getElementsByClassName('replyDiv')[index].appendChild(form);
+  console.log(index);
+}
 
 
 const init = ()=>{

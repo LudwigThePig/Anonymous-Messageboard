@@ -25,11 +25,14 @@ const http = {
   
   deleter: (thread)=>{
     const options = {
-      method: "POST",
+      method: "DELETE",
       body: thread,
       headers: {'Content-Type': 'application/json'}
     };
-    return fetch(`/api/threads/${id}`)
+    return fetch(`/api/threads/${id}`, options)
+      .then(res => res)
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   }
 }//end http
 const renderer = ()=>{
@@ -75,6 +78,7 @@ const eventListeners = ()=>{
   dom.formDelete.addEventListener('submit', (e)=>{
     e.preventDefault();
     http.deleter(JSON.stringify({key: dom.threadKey.value}))
+    window.location.replace(`/b/${board}`);
   })
 };
 

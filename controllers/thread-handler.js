@@ -17,7 +17,6 @@ function ControllerHandler(){
     const board = req.params.board,
           text = req.body.threadText,
           key = req.body.deleteKey;
-    console.log(board, text, key);
     Thread.findOne({threadText: text}, (err, doc)=>{
       if (err) console.log(err);
       if (doc){
@@ -43,6 +42,12 @@ function ControllerHandler(){
   }
   
   this.deleteThread = (req, res)=>{
+    const key = req.body.key;
+    Thread.findOneAndDelete({deleteKey: key}, (err)=>{
+      if (err) console.log(err);
+      console.log('thread deleted');
+      res.json({message: "Thread deleted"});
+    })
   }
 }
 

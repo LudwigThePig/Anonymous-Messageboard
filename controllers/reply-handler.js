@@ -5,13 +5,16 @@ function ReplyHandler(){
     const id = req.params.board;
     Thread.findById(id, (err, doc)=>{
       if (err) console.log(err);
-      const response = doc.map(x => x.reply);
+      const response = {
+        board: doc.board,
+        threadText: doc.threadText,
+        comments: doc.comments.map(x => x.reply)
+      }
       res.json(response);
     })
   };
   
   this.addReply = (req, res)=>{
-    console.log(req.body);
     const reply = {
       reply: req.body.reply,
       key:req.body.key
@@ -26,7 +29,21 @@ function ReplyHandler(){
   };
   
   this.deleteReply = (req, res)=>{
-  
+    const id = req.params.board;
+    const key = req.body.key;
+    const index = req.body.index;
+    console.log(key, index);
+    Thread.findOne({_id: id}, (err, doc)=>{
+      if (err) console.log(err);
+      if (doc.comments[index].key === key){
+        doc.comments.splice(index, 1);
+        doc.save().then(
+          res.json({message: "Reply deleted successfully"})
+        )
+      } else{
+        res.json({message: "Invalid key for this comment"})
+      }
+    })
   };
   
   this.putReply = (req, res)=>{

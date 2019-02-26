@@ -97,6 +97,14 @@ const eventListeners = ()=>{
   }
   dom.formReply.addEventListener('submit', (e)=>{
     e.preventDefault();
+    if (dom.reply.value.length > 280){
+      alert('Comments cannot be longer than 280 characters.')
+      return;
+    }
+    if (dom.replyKey.value.length > 12){
+      alert('Keys cannot be longer than 12 characters.');
+      return;
+    }
     const request = {
       "reply": dom.reply.value,
       "key": dom.replyKey.value,

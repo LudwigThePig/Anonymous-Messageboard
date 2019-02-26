@@ -11,20 +11,33 @@ const ThreadSchema = new Schema({
     type: String,
     required: true,
     min: 1,
-    max: 1000
+    max: 5000
   },
   deleteKey: {
     type: String,
     required: true,
     min: 1,
-    max: 10,
+    max: 12,
   },
   dateCreated: {
     type: String,
     default: new Date()
   },
   comments: {
-    type: [Object]
+    type: [{
+      reply: {
+        type: String,
+        min: 1,
+        max: 280,
+        required: true
+      },
+      key: {
+        type: String,
+        min: 1,
+        max: 12,
+        required: true
+      }
+    }]
   }
 });
 

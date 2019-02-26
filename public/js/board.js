@@ -68,6 +68,10 @@ const eventListeners = ()=>{
   }
   dom.form.addEventListener('submit', (e)=>{
     e.preventDefault();
+    if (dom.textArea.value.length > 5000){
+      alert("Threads cannot be longer than 5,000 characters");
+      return;
+    }
     const request = {
       "threadText": dom.textArea.value,
       "deleteKey": dom.deleteKey.value

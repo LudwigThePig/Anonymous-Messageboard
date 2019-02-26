@@ -2,8 +2,9 @@ const url = location.pathname.slice(3).toString().split('/');
 const board = url[0];
 const id = url[1];
 
-let thread = {};
-const http = {
+let thread = {}; //Stores all the info needed to render the page. Data gathered from http.getter function, which is called onload()
+
+const http = { //All the http fetch functions that a user will ever need.
   getter: ()=>{
     return fetch(`/api/replies/${id}`)
       .then(response => response.json())
@@ -33,8 +34,27 @@ const http = {
       .then(res => res)
       .then(data => console.log(data))
       .catch(err => console.log(err));
+  },
+  deleteReply: (reply)=>{
+    const options = {
+      method: "DELETE",
+      body: reply,
+      headers: {'Content-Type': 'application/json'}
+    }
+    console.log(reply);
+    return fetch(`/api/replies/${id}`, options)
+      .then(res => res.json)
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   }
 }//end http
+
+
+
+/*
+Renderer is called after the http.getter() function gets the thread's data.
+It renders the board name, thread text, and the thread's replies (in the for loop, might split later).
+*/
 const renderer = ()=>{
   const boardLink = document.createElement('h2');
   boardLink.innerText = `Go back to ${board}`;
@@ -92,12 +112,17 @@ const eventListeners = ()=>{
   })
 };
 
+
+/*
+  This appends the form to delete a reply and adds the event listener to the form. 
+  The event listener calls the HTTP deleteReply function.
+  This function is called by the renderer function.
+*/
 const appendDeleteReply = (index)=>{
   const form = document.createElement('form');
   const text = document.createElement('input');
   const submit = document.createElement('input');
   
-  form.setAttribute('id', `delete${index}`)
   text.setAttribute('type', 'text');
   text.setAttribute('placeholder', 'delete key');
   text.setAttribute('required', "''");
@@ -107,6 +132,16 @@ const appendDeleteReply = (index)=>{
 
   form.appendChild(text);
   form.appendChild(submit);
+  
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const reply = {
+      index: index,
+      key: text.value,
+      id: id
+    }
+    http.deleteReply(JSON.stringify(reply));
+  });
   
   document.getElementsByClassName('replyDiv')[index].appendChild(form);
   console.log(index);

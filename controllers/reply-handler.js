@@ -24,7 +24,7 @@ function ReplyHandler(){
       if (err) console.log(err);
       doc.comments.push(reply);
       doc.save()
-        .then(console.log(doc));
+        .then(res.json({message: "Comment Posted"}));
     })
   };
   
@@ -32,7 +32,6 @@ function ReplyHandler(){
     const id = req.params.board;
     const key = req.body.key;
     const index = req.body.index;
-    console.log(key, index);
     Thread.findOne({_id: id}, (err, doc)=>{
       if (err) console.log(err);
       if (doc.comments[index].key === key){

@@ -19,8 +19,8 @@ const http = { //All the http fetch functions that a user will ever need.
       headers: {'Content-Type': 'application/json'}
     };
     return fetch(`/api/replies/${id}`, options)
-      .then(response => response)
-      .then(data => data)
+      .then(res => res.json())
+      .then(data => console.log(data))
       .catch(err => console.log(err));
   },
   
@@ -31,8 +31,8 @@ const http = { //All the http fetch functions that a user will ever need.
       headers: {'Content-Type': 'application/json'}
     };
     return fetch(`/api/threads/${id}`, options)
-      .then(res => res)
-      .then(data => console.log(data))
+      .then(res => res.json())
+      .then(data => messageAlert(data))
       .catch(err => console.log(err));
   },
   deleteReply: (reply)=>{
@@ -43,8 +43,8 @@ const http = { //All the http fetch functions that a user will ever need.
     }
     console.log(reply);
     return fetch(`/api/replies/${id}`, options)
-      .then(res => res.json)
-      .then(data => console.log(data))
+      .then(res => res.json())
+      .then(data => messageAlert(data))
       .catch(err => console.log(err));
   }
 }//end http
@@ -145,6 +145,12 @@ const appendDeleteReply = (index)=>{
   
   document.getElementsByClassName('replyDiv')[index].appendChild(form);
   console.log(index);
+}
+
+const messageAlert = (message)=>{ //Just parses messages from backend into an alert. Split to scale later
+  console.log(message)
+  alert(message.message);
+  location.reload();
 }
 
 

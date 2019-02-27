@@ -40,10 +40,11 @@ function ControllerHandler(){
       }
     })
   }
-  
+  /*TODO FIX THIS SO THAT IT DELETES THE SPECIFIED ID IF KEYS MATCH*/
   this.deleteThread = (req, res)=>{
+    const id = req.body.id;
     const key = req.body.key;
-    Thread.findOneAndDelete({deleteKey: key}, (err)=>{
+    Thread.findOne({_id: id}, (err, doc)=>{
       if (err) console.log(err);
       console.log('thread deleted');
       res.json({message: "Thread deleted"});

@@ -14,9 +14,22 @@ var server = require('../server');
 chai.use(chaiHttp);
 
 suite('Functional Tests', function() {
-
-  suite('API ROUTING FOR /api/threads/:board', function() {
-    
+    suite('API ROUTING FOR /api/threads/:board', function() {
+    let id;
+      
+    suite('POST', function() {
+      test('Posting a thread', (done)=>{
+        chai.request(server)
+          .post('/api/threads/general')
+          .send({threadText: "testing", deleteKey: "test"})
+          .end((err, res)=>{
+            assert.equal(res.status, 200);
+            assert.equal(res.body.message, 'Please stop spamming'); //This is the response sent when the thread text is a duplicate.
+            done();
+          })
+      })
+    });
+  
     suite('GET', function() {
       test('Getting threads', (done)=>{
       chai.request(server)
@@ -31,52 +44,19 @@ suite('Functional Tests', function() {
           assert.isString(res.body[0].deleteKey, 'Delete key should be a string');
           assert.isArray(res.body[0].comments, 'Comments should be stored in an array');
           assert.isObject(res.body[0].comments[0], 'Each comment should stored in an object with its key');
-        
-          
-  // threadText: {
-  //   type: String,
-  //   required: true,
-  //   min: 1,
-  //   max: 5000
-  // },
-  // deleteKey: {
-  //   type: String,
-  //   required: true,
-  //   min: 1,
-  //   max: 12,
-  // },
-  // dateCreated: {
-  //   type: String,
-  //   default: new Date()
-  // },
-  // comments: {
-  //   type: [{
-  //     reply: {
-  //       type: String,
-  //       min: 1,
-  //       max: 280,
-  //       required: true
-  //     },
-  //     key: {
-  //       type: String,
-  //       min: 1,
-  //       max: 12,
-  //       required: true
-  //     }
-  //   }]
-  // }
-// });
+          id = res.body[res.body.length-1]._id; //id to the test suite for deletion
           done();
         })
       })
     });
     
-    suite('POST', function() {
-      
-    });
-    
     suite('DELETE', function() {
-      
+      test('Deleting a thread', (done)=>{
+        console.log(id);
+        chai.request(server)
+          .delete('/api/threads/general')
+          .send({id: id, key: 'del;'})
+      })
     });
     
     suite('PUT', function() {
@@ -95,7 +75,7 @@ suite('Functional Tests', function() {
     suite('GET', function() {
       
     });
-
+    
     suite('PUT', function() {
       
     });

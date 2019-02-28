@@ -1,9 +1,9 @@
 /*
 *
-*
-*       FILL IN EACH FUNCTIONAL TEST BELOW COMPLETELY
-*       -----[Keep the tests in the same order!]-----
-*       (if additional are added, keep them at the very end!)
+*  PLEASE RUN THE TEST MULTIPLE TIMES. 
+*  Tests can post threads faster than they can delete them.
+*  You may get an error saying: 'This thread already exists' should equal 'Thread Created'.
+*       
 */
 
 var chaiHttp = require('chai-http');
@@ -83,21 +83,68 @@ suite('Functional Tests', function() {
   });
   
   suite('API ROUTING FOR /api/replies/:board', function() {
-    
+    const id = '5c7838a90479833484cdf4ee'; //ID for test thread 
     suite('POST', function() {
+      test('Posting a reply', (done)=>{
+      chai.request(server)
+          .post('/api/replies/general')
+          .send({reply: "testing", key: "test", id: id})
+          .end((err, res)=>{
+            assert.equal(res.status, 200, 'Should connect');
+            assert.isObject(res.body, 'Should be an object');
+            assert.isString(res.body.message, 'Response message should be a string');
+            assert.equal(res.body.message, "Comment Posted");
+            done();
+          });
+      });
       
     });
     
     suite('GET', function() {
+      test('Getting replies', (done)=>{
+      chai.request(server)
+          .get(`/api/replies/${id}`)
+          .send({key: "test", id: id})
+          .end((err, res)=>{
+            assert.equal(res.status, 200, 'Should connect');
+            assert.equal(res.body.board, 'general');
+            assert.isArray(res.body.comments, 'Comments should be stored in an array');
+            assert.equal(res.body.comments[0], 'testing');
+            done();
+          });
+      });
+      
       
     });
     
-    suite('PUT', function() {
-      
-    });
+//     suite('PUT', function() {
+      //No need to update comments
+//     });
     
     suite('DELETE', function() {
+      test('Deleting a reply with the wrong key', (done)=>{
+        chai.request(server)
+          .delete(`/api/replies/${id}`)
+          .send({key: "wrongkey", index: 0})
+          .end((err, res)=>{
+            assert.equal(res.status, 200, 'Should connect');
+            assert.isString(res.body.message, 'Response message should be a string');
+            assert.equal(res.body.message, 'Invalid key for this comment');
+            done();
+          })
+      })
       
+      test('Deleting replies with the correct key', (done)=>{
+        chai.request(server)
+          .delete(`/api/replies/${id}`)
+          .send({key: "test", index: 0})
+          .end((err, res)=>{
+            assert.equal(res.status, 200, 'Should connect');
+            assert.isString(res.body.message, 'Response message should be a string');
+            assert.equal(res.body.message, 'Reply deleted successfully');
+            done();
+          });
+      });
     });
     
   });

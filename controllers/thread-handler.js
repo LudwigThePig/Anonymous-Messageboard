@@ -44,11 +44,15 @@ function ControllerHandler(){
   this.deleteThread = (req, res)=>{
     const id = req.body.id;
     const key = req.body.key;
-    console.log(id, key);
     Thread.findOneAndDelete({_id: id, deleteKey: key}, (err, doc)=>{
       if (err) console.log(err);
-      console.log('thread deleted');
-      res.json({message: "Thread deleted"});
+      if (doc){
+        console.log('thread deleted');
+        res.json({message: "Thread deleted"});
+      } else {
+        console.log('This key does not match')
+        res.json({message: "Key did not match. Try again."});
+      }
     })
   }
 }

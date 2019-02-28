@@ -33,6 +33,7 @@ const http = { //All the http fetch functions that a user will ever need.
     return fetch(`/api/threads/${id}`, options)
       .then(res => res.json())
       .then(data => messageAlert(data))
+      .then(_=> document.location.replace(`/b/${board}`))
       .catch(err => console.log(err));
   },
   deleteReply: (reply)=>{
@@ -115,8 +116,7 @@ const eventListeners = ()=>{
   })
   dom.formDelete.addEventListener('submit', (e)=>{
     e.preventDefault();
-    http.deleter(JSON.stringify({key: dom.threadKey.value}))
-    window.location.replace(`/b/${board}`);
+    http.deleter(JSON.stringify({id: id, key: dom.threadKey.value}))
   })
 };
 

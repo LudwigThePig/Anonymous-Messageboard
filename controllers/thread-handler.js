@@ -44,7 +44,8 @@ function ControllerHandler(){
   this.deleteThread = (req, res)=>{
     const id = req.body.id;
     const key = req.body.key;
-    Thread.findOne({_id: id}, (err, doc)=>{
+    console.log(id, key);
+    Thread.findOneAndDelete({_id: id, deleteKey: key}, (err, doc)=>{
       if (err) console.log(err);
       console.log('thread deleted');
       res.json({message: "Thread deleted"});

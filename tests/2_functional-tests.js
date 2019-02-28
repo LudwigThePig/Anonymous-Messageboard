@@ -24,7 +24,7 @@ suite('Functional Tests', function() {
           .send({threadText: "testing", deleteKey: "test"})
           .end((err, res)=>{
             assert.equal(res.status, 200);
-            assert.equal(res.body.message, 'Please stop spamming'); //This is the response sent when the thread text is a duplicate.
+            assert.equal(res.body.message, "Document Created"); //This is the response sent when the thread text is a duplicate.
             done();
           })
       })
@@ -51,17 +51,33 @@ suite('Functional Tests', function() {
     });
     
     suite('DELETE', function() {
-      test('Deleting a thread', (done)=>{
-        console.log(id);
+      test('Deleting a thread with the wrong key', (done)=>{
         chai.request(server)
           .delete('/api/threads/general')
-          .send({id: id, key: 'del;'})
+          .send({id: id, key: 'wrongkey'})
+          .end((err, res)=>{
+            assert.equal(res.status, 200, 'Should connect');
+            assert.isString(res.body.message, 'Response should be a string.');
+            assert.equal(res.body.message, 'Key did not match. Try again.')
+            done();
+          });
+      })
+      test('Deleting a thread with the right key', (done)=>{
+        chai.request(server)
+          .delete('/api/threads/general')
+          .send({id: id, key: 'test'})
+          .end((err, res)=>{
+            assert.equal(res.status, 200, 'Should connect');
+            assert.isString(res.body.message, 'Response should be a string.');
+            assert.equal(res.body.message, 'Thread deleted')
+            done();
+          });
       })
     });
     
-    suite('PUT', function() {
+//     suite('PUT', function() { Not support PUT requests for this messageboard
       
-    });
+//     });
     
 
   });

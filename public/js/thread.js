@@ -78,6 +78,7 @@ const renderer = ()=>{
       p.innerText = comments[i];
       span.innerText = 'Delete Comment';
       
+      span.setAttribute('id', `del${1}`);
       span.setAttribute('onclick', `appendDeleteReply(${i})`);
       
       div.appendChild(p);
@@ -139,7 +140,9 @@ const appendDeleteReply = (index)=>{
   submit.setAttribute('value', 'delete');
 
   form.appendChild(text);
-  form.appendChild(submit);
+  form.appendChild(submit);  
+  
+  document.getElementById(`del${1}`).remove();
   
   form.addEventListener('submit', (e)=>{
     e.preventDefault();

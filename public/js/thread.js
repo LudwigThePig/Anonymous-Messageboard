@@ -47,7 +47,17 @@ const http = { //All the http fetch functions that a user will ever need.
       .then(res => res.json())
       .then(data => messageAlert(data))
       .catch(err => console.log(err));
-  }
+  },
+  reporter: ()=>{
+    const options = {
+      method: "PUT",
+      headers: {'Content-Type': 'application/json'}
+    }
+    return fetch(`/api/threads/${id}`, options)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  },
 }//end http
 
 
@@ -121,7 +131,7 @@ const eventListeners = ()=>{
     http.deleter(JSON.stringify({id: id, key: dom.threadKey.value}))
   })
   dom.reportBtn('click', (e)=>{
-    http.putter();
+    http.reporter();
     console.log(`$thread: {id} has been reported`)
   })
 };

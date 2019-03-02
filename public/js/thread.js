@@ -95,7 +95,8 @@ const eventListeners = ()=>{
     reply: document.getElementsByName('text')[0],
     replyKey: document.getElementsByName('delete')[0],
     formDelete: document.getElementById('deleteForm'),
-    threadKey: document.getElementsByName('text')[1]
+    threadKey: document.getElementsByName('text')[1],
+    reportBtn: document.getElementById('reportThread')
   }
   dom.formReply.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -118,6 +119,10 @@ const eventListeners = ()=>{
   dom.formDelete.addEventListener('submit', (e)=>{
     e.preventDefault();
     http.deleter(JSON.stringify({id: id, key: dom.threadKey.value}))
+  })
+  dom.reportBtn('click', (e)=>{
+    http.putter();
+    console.log(`$thread: {id} has been reported`)
   })
 };
 

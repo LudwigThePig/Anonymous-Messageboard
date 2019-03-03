@@ -38,6 +38,10 @@ const ThreadSchema = new Schema({
         required: true
       }
     }]
+  },
+  reported: {
+    type: Boolean,
+    default: false
   }
 });
 

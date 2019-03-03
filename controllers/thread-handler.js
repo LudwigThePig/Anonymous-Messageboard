@@ -9,7 +9,6 @@ function ControllerHandler(){
         docs[i].deleteKey = ''; //Avoids sending the key to the client.
       }
       res.json(docs);
-
     })
   }
   
@@ -31,8 +30,8 @@ function ControllerHandler(){
         thread.save().then( (doc)=>{
           console.log(`document created: ${doc}`);
           let response = {
-            dateCreated: doc.dateCreated,
-            threadText: doc.threadText,
+            message: "Document Created",
+            id: doc._id
           }
           res.json(response);
         }
@@ -53,6 +52,14 @@ function ControllerHandler(){
         console.log('This key does not match')
         res.json({message: "Key did not match. Try again."});
       }
+    })
+  },
+  this.reportThread = (req, res)=>{
+    const id = req.params.board;
+    Thread.findOneAndUpdate({_id: id}, {reported: true}, (err,doc)=>{
+      if (err) console.log(err);
+      console.log(doc.reported);
+      res.json({message: "Thread has been reported"});
     })
   }
 }

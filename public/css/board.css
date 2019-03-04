@@ -1,16 +1,28 @@
 .threadDiv{
-    background: #ccc;
-    margin: 10px;
-  }
-  .threadDiv h3{
-    text-align: left;
-    font-size: 1.2em;
-    color: #000;
-  }
-  .threadDiv span{
-    color: #333;
-  }
-  .threadDiv:hover{
-    background: #fff;
-    cursor: pointer;
-  }
+  background: #ccc;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "content content content content" "date date replies replies";
+}
+.threadDiv h3{
+  text-align: left;
+  font-size: 1.2em;
+  grid-area: content;
+  color: #000;
+}
+.threadDiv span{
+  color: #333;
+  align-self: center;
+}
+.threadDiv span:nth-child(1){
+  grid-area: date;
+}
+.threadDiv span:nth-child(2){
+  grid-area: replies;
+}
+.threadDiv:hover{
+  background: #fff;
+  cursor: pointer;
+}

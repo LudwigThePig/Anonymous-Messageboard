@@ -34,7 +34,6 @@ const renderer = ()=>{
     const div = document.createElement('div');
     const threadText = document.createElement('h3');
     const date = document.createElement('span');
-    const deleteLink = document.createElement('span');
     const replyCount = document.createElement('span');
     
     if (threads[i].threadText.length > 100){ //Display only some of the text
@@ -43,18 +42,14 @@ const renderer = ()=>{
       threadText.innerText = threads[i].threadText
     }
     date.innerText = threads[i].dateCreated;
-    deleteLink.innerText = 'Delete Thread';
     replyCount.innerText = `${threads[i].comments.length} replies`
     
     div.setAttribute('class', 'threadDiv');
     div.setAttribute('onclick', `location.href='/b/${threads[i].board}/${threads[i]._id}'`)
-    deleteLink.setAttribute('class', 'deleteLink');
-    deleteLink.setAttribute('id', threads[i]._id)
     
     div.appendChild(threadText);
     div.appendChild(date);
     div.appendChild(replyCount);
-    div.appendChild(deleteLink);
     domNode.appendChild(div)
   }
   

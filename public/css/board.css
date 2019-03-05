@@ -26,3 +26,11 @@
   background: #fff;
   cursor: pointer;
 }
+.reported{
+  background: #640016;
+  margin: 10px;
+}
+.reported:hover{
+  background: #64001647;
+  cursor: pointer;
+}

@@ -29,31 +29,39 @@ const http = {
   }
 }//end http
 const renderer = ()=>{  
-  const domNode = document.getElementById('threads');
   for (let i = 0; i < threads.length; i++){
+    console.log(threads[i]);
+    if (!threads[i].reported){
+      renderThread(threads[i]);
+    }
+
+  }
+};
+
+const renderThread = {
+  norm: (thread)=>{
     const div = document.createElement('div');
     const threadText = document.createElement('h3');
     const date = document.createElement('span');
     const replyCount = document.createElement('span');
-    
-    if (threads[i].threadText.length > 100){ //Display only some of the text
-      threadText.innerText = threads[i].threadText.slice(0, 100) + "...";
+
+    if (thread.threadText.length > 100){ //Display only some of the text
+      threadText.innerText = thread.threadText.slice(0, 100) + "...";
     } else {
-      threadText.innerText = threads[i].threadText
-    }
-    date.innerText = threads[i].dateCreated;
-    replyCount.innerText = `${threads[i].comments.length} replies`
-    
-    div.setAttribute('class', 'threadDiv');
-    div.setAttribute('onclick', `location.href='/b/${threads[i].board}/${threads[i]._id}'`)
-    
-    div.appendChild(threadText);
-    div.appendChild(date);
-    div.appendChild(replyCount);
-    domNode.appendChild(div)
+        threadText.innerText = thread.threadText
+      }
+      date.innerText = thread.dateCreated;
+      replyCount.innerText = `${thread.comments.length} replies`
+
+      div.setAttribute('class', 'threadDiv');
+      div.setAttribute('onclick', `location.href='/b/${thread.board}/${thread._id}'`)
+
+      div.appendChild(threadText);
+      div.appendChild(date);
+      div.appendChild(replyCount);
+      document.getElementById('threads').appendChild(div);
   }
-  
-};
+}
 
 const eventListeners = ()=>{
   const dom = {

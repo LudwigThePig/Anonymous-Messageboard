@@ -69,11 +69,11 @@ const renderThread = {
     const threadText = document.createElement('h3');
     const span = document.createElement('span');
 
-    threadText.innerText = "Thread Reported";
-    span.innerText = "Click To See More";
+    threadText.innerText = "Reported Thread";
+    span.innerText = "Click To View";
     
     
-    div.setAttribute('class', 'threadDiv');
+    div.setAttribute('class', 'reported');
     div.setAttribute('id', `r${thread._id}`)
     div.addEventListener('click', (e)=>{
       e.preventDefault();      

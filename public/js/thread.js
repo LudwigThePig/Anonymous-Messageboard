@@ -55,7 +55,7 @@ const http = { //All the http fetch functions that a user will ever need.
     }
     return fetch(`/api/threads/${id}`, options)
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => alert(data.message))
       .catch(err => console.log(err));
   },
 }//end http

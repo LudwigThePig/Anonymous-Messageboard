@@ -32,7 +32,9 @@ const renderer = ()=>{
   for (let i = 0; i < threads.length; i++){
     console.log(threads[i]);
     if (!threads[i].reported){
-      renderThread(threads[i]);
+      renderThread.norm(threads[i]);
+    } else {
+      renderThread.reported(threads[i]);
     }
 
   }
@@ -60,6 +62,29 @@ const renderThread = {
       div.appendChild(date);
       div.appendChild(replyCount);
       document.getElementById('threads').appendChild(div);
+  },
+  
+  reported: (thread)=>{
+    const div = document.createElement('div');
+    const threadText = document.createElement('h3');
+    const span = document.createElement('span');
+
+    threadText.innerText = "Thread Reported";
+    span.innerText = "Click To See More";
+    
+    
+    div.setAttribute('class', 'threadDiv');
+    div.setAttribute('id', `r${thread._id}`)
+    div.addEventListener('click', (e)=>{
+      e.preventDefault();      
+      renderThread.norm(thread);
+      const element = document.getElementById(`r${thread._id}`);
+      element.parentNode.removeChild(element);
+    });
+    
+    div.appendChild(threadText);
+    div.appendChild(span);    
+    document.getElementById('threads').appendChild(div);
   }
 }
 

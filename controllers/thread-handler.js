@@ -5,10 +5,19 @@ function ControllerHandler(){
     const board = req.params.board;
     Thread.find({board: board}, (err, docs)=>{
       if (err) console.log(err);
+      let response = [];
+
       for (let i = 0; i<docs.length; i++){
-        docs[i].deleteKey = ''; //Avoids sending the key to the client.
+        let obj = {
+          board: docs[i].board,
+          threadText: docs[i].threadText,
+          dateCreated: docs[i].dateCreated,
+          comments: docs[i].comments.length, 
+          reported: docs[i].reported
+        }
+        response.push(obj);
       }
-      res.json(docs);
+      res.json(response);
     })
   }
   

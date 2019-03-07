@@ -73,8 +73,13 @@ const renderer = ()=>{
   document.getElementById('header').appendChild(boardLink);
   
   const threadText = document.createElement('p');
+  const date = document.createElement('span');
   threadText.innerText = thread.threadText;
   document.getElementById('thread').appendChild(threadText);
+  document.getElementById('thread').appendChild(date);
+  
+  const prunedDate = thread.dateCreated.split(' ').slice(1,5).join(" ") + " GMT"; //Feb 28 2019 19:50:20 GMT
+  date.innerText = `Created: ${prunedDate}`;
   
   if (thread.comments.length !== 0){
     const comments = thread.comments;

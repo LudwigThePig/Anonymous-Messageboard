@@ -13,7 +13,9 @@
   color: #000;
 }
 .threadDiv span{
-  color: #333;
+  color: #640016;
+  font-weight: bold;
+  font-size: 0.8em;
   align-self: center;
 }
 .threadDiv span:nth-child(1){

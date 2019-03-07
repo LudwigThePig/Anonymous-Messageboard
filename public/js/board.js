@@ -52,16 +52,20 @@ const renderThread = {
     } else {
         threadText.innerText = thread.threadText
       }
-      date.innerText = thread.dateCreated;
-      replyCount.innerText = `${thread.comments.length} replies`
+    
+        //this trims the fat off of... "Thu Feb 28 2019 19:37:35 GMT+0000 (Coordinated Universal Time)" 
+    const prunedDate = thread.dateCreated.split(' ').slice(1,5).join(" ") + " GMT"; //Feb 28 2019 19:50:20 GMT
+    date.innerText = `Created: ${prunedDate}`;
+    
+    replyCount.innerText = `${thread.comments.length} replies`
 
-      div.setAttribute('class', 'threadDiv');
-      div.setAttribute('onclick', `location.href='/b/${thread.board}/${thread._id}'`)
+    div.setAttribute('class', 'threadDiv');
+    div.setAttribute('onclick', `location.href='/b/${thread.board}/${thread._id}'`)
 
-      div.appendChild(threadText);
-      div.appendChild(date);
-      div.appendChild(replyCount);
-      document.getElementById('threads').appendChild(div);
+    div.appendChild(threadText);
+    div.appendChild(date);
+    div.appendChild(replyCount);
+    document.getElementById('threads').appendChild(div);
   },
   
   reported: (thread)=>{

@@ -6,8 +6,16 @@
     color: #fff;
   }
   
-  #thread{
+  #thread p{
   text-align: left;
+  }
+  
+  #thread span{
+    color: #640016;
+    text-align: center;
+    font-weight: bold;
+    font-size: .8em;
+    line-height: 2em;
   }
   
   #replies, #thread{

@@ -8,6 +8,7 @@ function ReplyHandler(){
       const response = {
         board: doc.board,
         threadText: doc.threadText,
+        dateCreated: doc.dateCreated,
         comments: doc.comments.map(x => x.reply)
       }
       res.json(response);

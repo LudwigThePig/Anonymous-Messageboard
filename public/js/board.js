@@ -57,7 +57,7 @@ const renderThread = {
     const prunedDate = thread.dateCreated.split(' ').slice(1,5).join(" ") + " GMT"; //Feb 28 2019 19:50:20 GMT
     date.innerText = `Created: ${prunedDate}`;
     
-    replyCount.innerText = `${thread.comments.length} replies`
+    replyCount.innerText = `${thread.comments} replies`
 
     div.setAttribute('class', 'threadDiv');
     div.setAttribute('onclick', `location.href='/b/${thread.board}/${thread._id}'`)

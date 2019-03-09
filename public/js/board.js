@@ -36,10 +36,14 @@ const renderer = ()=>{
   });
   
   for (let i = 0; i < threads.length; i++){
+    const domNode = document.getElementById('threads');
     if (!threads[i].reported){
-      renderThread.norm(threads[i]);
+      const threadDiv = renderThread.norm(threads[i]);
+      domNode.insertBefore(threadDiv, domNode.children[i+1]);
     } else {
-      renderThread.reported(threads[i]);
+      const threadDiv = renderThread.reported(threads[i], i, domNode);
+      domNode.insertBefore(threadDiv, domNode.children[i+1]);
+
     }
 
   }
@@ -58,8 +62,8 @@ const renderThread = {
         threadText.innerText = thread.threadText
       }
     
-        //this trims the fat off of... "Thu Feb 28 2019 19:37:35 GMT+0000 (Coordinated Universal Time)" 
-    const prunedDate = thread.dateCreated.split(' ').slice(1,5).join(" ") + " GMT"; //Feb 28 2019 19:50:20 GMT
+        //"Thu Feb 28 2019 19:37:35 GMT+0000 (Coordinated Universal Time)" => "Feb 28 2019 19:50:20 GMT"
+    const prunedDate = thread.dateCreated.split(' ').slice(1,5).join(" ") + " GMT"; //
     date.innerText = `Created: ${prunedDate}`;
     
     replyCount.innerText = `${thread.comments} replies`
@@ -70,10 +74,10 @@ const renderThread = {
     div.appendChild(threadText);
     div.appendChild(date);
     div.appendChild(replyCount);
-    document.getElementById('threads').appendChild(div);
+    return div;
   },
   
-  reported: (thread)=>{
+  reported: (thread, i, domNode)=>{
     const div = document.createElement('div');
     const threadText = document.createElement('h3');
     const span = document.createElement('span');
@@ -86,15 +90,13 @@ const renderThread = {
     div.setAttribute('id', `r${thread._id}`)
     div.addEventListener('click', (e)=>{
       e.preventDefault();      
-      renderThread.norm(thread);
-      //parentElement.insertBefore(newElement, parentElement.children[2]);
       const element = document.getElementById(`r${thread._id}`);
-      element.parentNode.removeChild(element);
+      element.parentNode.replaceChild(renderThread.norm(thread), div);
     });
     
     div.appendChild(threadText);
     div.appendChild(span);    
-    document.getElementById('threads').appendChild(div);
+    return div;
   }
 }
 

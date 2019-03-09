@@ -60,7 +60,7 @@ const renderThread = {
     replyCount.innerText = `${thread.comments} replies`
 
     div.setAttribute('class', 'threadDiv');
-    div.setAttribute('onclick', `location.href='/b/${thread.board}/${thread._id}'`)
+    div.setAttribute('onclick', `location.href='/b/${thread.board}/${thread.id}'`)
 
     div.appendChild(threadText);
     div.appendChild(date);

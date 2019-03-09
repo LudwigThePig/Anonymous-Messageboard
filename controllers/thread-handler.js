@@ -9,11 +9,12 @@ function ControllerHandler(){
 
       for (let i = 0; i<docs.length; i++){
         let obj = {
+          id: docs[i]._id,
           board: docs[i].board,
           threadText: docs[i].threadText,
           dateCreated: docs[i].dateCreated,
           comments: docs[i].comments.length, 
-          reported: docs[i].reported
+          reported: docs[i].reported,
         }
         response.push(obj);
       }

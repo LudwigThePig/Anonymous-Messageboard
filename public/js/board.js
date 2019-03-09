@@ -29,8 +29,13 @@ const http = {
   }
 }//end http
 const renderer = ()=>{  
+  
+  //sorts threads, with the newest being first
+  threads.sort(function(a,b){
+    return new Date(b.dateCreated) - new Date(a.dateCreated);
+  });
+  
   for (let i = 0; i < threads.length; i++){
-    console.log(threads[i]);
     if (!threads[i].reported){
       renderThread.norm(threads[i]);
     } else {
@@ -82,6 +87,7 @@ const renderThread = {
     div.addEventListener('click', (e)=>{
       e.preventDefault();      
       renderThread.norm(thread);
+      //parentElement.insertBefore(newElement, parentElement.children[2]);
       const element = document.getElementById(`r${thread._id}`);
       element.parentNode.removeChild(element);
     });

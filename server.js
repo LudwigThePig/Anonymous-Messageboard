@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expect = require('chai').expect;
 const cors = require('cors');
-
+const auth = require('./routes/auth.js');
 const apiRoutes = require('./routes/api.js');
 const fccTestingRoutes = require('./routes/fcctesting.js');
 const runner = require('./test-runner');
@@ -16,6 +16,7 @@ const app = express();
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.use(helmet());
+app.use(helmet.frameguard({ action: 'sameorigin' }))
 
 app.use(cors({origin: '*'})); //For FCC testing purposes only
 
@@ -52,11 +53,12 @@ app.use(function(req, res, next) {
     .send('Not Found');
 });
 
-mongoose.connect(process.env.MONGO, (err)=>{
+mongoose.connect(process.env.MONGO, (err, db)=>{
   if (err){
     console.log(err);
   } else {
-    console.log('You are now connected to the database!')
+    auth(app, db);
+    console.log('You are now connected to the database!');
   }
 });
 

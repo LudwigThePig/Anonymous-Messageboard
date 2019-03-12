@@ -32,7 +32,10 @@ app.route('/b/:board/:threadid')
   .get(function (req, res) {
     res.sendFile(process.cwd() + '/views/thread.html');
   });
-
+app.route('/login')
+  .get(function (req, res) {
+    res.sendFile(process.cwd() + '/views/login.html');
+  });
 //Index page (static HTML)
 app.route('/')
   .get(function (req, res) {

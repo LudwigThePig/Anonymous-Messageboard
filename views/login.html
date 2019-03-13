@@ -15,13 +15,21 @@
       <h1 onclick="location.href='/'" style="cursor: pointer">Anonymous Messageboard</h1>
     </div>
     <div id="body">
-      <form>
-        <input type="text" placeholder="username">
-        <input type="text" placeholder="password">
-        <input type="submit">
+      <form action="/" method="post">
+        <div>
+          <label>Username:</label>
+          <input type="text" name="username" />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" />
+        </div>
+        <div>
+          <input type="submit" value="Submit" />
+        </div>
       </form>
       <button>Create Account</button>
-      <script src="/public/js/login.js"></script>
     </div>
+  <script src="/public/js/login.js"></script>
   </body>
 </html>

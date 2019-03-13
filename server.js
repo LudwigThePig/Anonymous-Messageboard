@@ -43,6 +43,34 @@ passport.deserializeUser(function(id, cb) {
   });
 });
 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+      User.findOne({
+        username: username
+      }, function(err, user) {
+        if (err) {
+          return done(err);
+        }
+
+        if (!user) {
+          return done(null, false);
+        }
+
+        if (user.password != password) {
+          return done(null, false);
+        }
+        return done(null, user);
+      });
+  }
+));
+
+app.post('/',
+  passport.authenticate('local', { failureRedirect: '/error' }),
+  function(req, res) {
+    res.redirect('/success?username='+req.user.username);
+  });
+
+
 //front-end
 app.route('/b/:board/')
   .get(function (req, res) {

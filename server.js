@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/success', (req, res) => res.send("Welcome "+req.query.username+"!!"));
+app.get('/success', (req, res) => res.send("Welcome " + req.query.username + "!!"));
 app.get('/error', (req, res) => res.send("error logging in"));
 
 passport.serializeUser(function(user, cb) {
@@ -51,11 +51,9 @@ passport.use(new LocalStrategy(
         if (err) {
           return done(err);
         }
-
         if (!user) {
           return done(null, false);
         }
-
         if (user.password != password) {
           return done(null, false);
         }
@@ -64,7 +62,7 @@ passport.use(new LocalStrategy(
   }
 ));
 
-app.post('/',
+app.post('/login',
   passport.authenticate('local', { failureRedirect: '/error' }),
   function(req, res) {
     res.redirect('/success?username='+req.user.username);

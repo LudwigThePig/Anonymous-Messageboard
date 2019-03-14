@@ -13,6 +13,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const app = express();
 const passport = require('passport');
+const session = require('express-session')
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user-model.js');
 
@@ -25,6 +26,12 @@ app.use(cors({origin: '*'})); //For FCC testing purposes only
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+}));
 
 //Passport Init
 app.use(passport.initialize());
@@ -45,6 +52,7 @@ passport.deserializeUser(function(id, cb) {
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
+    console.log('line 48');
       User.findOne({
         username: username
       }, function(err, user) {
@@ -106,7 +114,6 @@ mongoose.connect(process.env.MONGO, (err, db)=>{
   if (err){
     console.log(err);
   } else {
-    auth(app, db);
     console.log('You are now connected to the database!');
   }
 });

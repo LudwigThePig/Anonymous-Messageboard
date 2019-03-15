@@ -33,7 +33,9 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-//Passport Init
+
+// PASSPORT INIT //
+/* this will be split into a sepearte file when it is up and running */
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -75,6 +77,9 @@ app.post('/login',
   function(req, res) {
     res.redirect('/success?username='+req.user.username);
   });
+// *** END
+// *** PASSPORT
+// *** AUTH
 
 
 //front-end
@@ -90,6 +95,8 @@ app.route('/login')
   .get(function (req, res) {
     res.sendFile(process.cwd() + '/views/login.html');
   });
+
+
 //Index page (static HTML)
 app.route('/')
   .get(function (req, res) {

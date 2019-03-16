@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const uniqueValidator = require("mongoose-unique-validator");
 const bcrypt = require("bcrypt");
-const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   username: {
@@ -9,10 +9,9 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
-  password: {
+  passwordHash: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   }
 });
 

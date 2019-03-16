@@ -54,21 +54,25 @@ passport.deserializeUser(function(id, cb) {
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    console.log('line 48');
-      User.findOne({
-        username: username
-      }, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false);
-        }
-        if (user.password != password) {
-          return done(null, false);
-        }
-        return done(null, user);
-      });
+    User.findOne({
+      username: username
+    }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        const newUser = new User({
+        username: username,
+        password: password
+        });
+        newUser.save()
+        done(null, newUser);
+      } 
+      if (user.password != password) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
   }
 ));
 

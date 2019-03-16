@@ -81,10 +81,38 @@ app.post('/login', passport.authenticate("local", {
   failureFlash: true
 }));
 
+app.post('/register', (req, res, next)=>{
+  console.log(req.body);
+  const {username, password} = req.body;
+  User.create({username, password})
+    .then(user => {
+      req.login((user, err)=>{
+        if (err){
+          next(err);
+        } else {
+          res.redirect("/")
+        }
+      })
+    })
+    .catch( err =>{
+      if (err.name === "ValidationError"){
+        req.flash("That name is already taken");
+        res.redirect("/register")
+      } else {
+        next(err);
+      }
+    })
+});
+
+app.all("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/login");
+});
+
 // *** END
 // *** PASSPORT
 // *** AUTH
-
+// guide: https://github.com/thebopshoobop/passport-local-basics
 
 //front-end
 app.route('/b/:board/')
